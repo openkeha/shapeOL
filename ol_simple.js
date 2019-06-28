@@ -20,19 +20,19 @@ window.onload = function () {
 	// this is ordinarily done by the format object, but since we're adding features manually we have to do it.
 	var fsLen = fs.length;
 	//var inProj = new OpenLayers.Projection('EPSG:4326');
-	//var outProj = new OpenLayers.Projection('EPSG:3857');
+	var outProj = new OpenLayers.Projection('EPSG:4326');
     proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
     console.log('PROJ4JS: '+proj4('EPSG:2154'));
-    /*var outProj = new OpenLayers.Projection('EPSG:2154');
+    var inProj = new OpenLayers.Projection('EPSG:2154');
 	for (var i = 0; i < fsLen; i++) {
 	    fs[i].geometry = fs[i].geometry.transform(inProj, outProj);
-	}*/
+	}
 	shpLayer.addFeatures(fs);
     });
-    var osm = new OpenLayers.Layer.OSM({sphericalMercator: true});
+    var osm = new OpenLayers.Layer.OSM({sphericalMercator: false});
     map = new OpenLayers.Map('map', {
         projection: new OpenLayers.Projection('EPSG:4326'),
-        sphericalMercator: true,    
+        sphericalMercator: false,    
         layers: [osm,shpLayer],
         });
     
